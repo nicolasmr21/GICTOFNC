@@ -1,0 +1,10 @@
+C:\Users\nicol\source\repos\GICTOFNC\GICTOFNC\bin\Debug\GICTOFNC.exe.config
+C:\Users\nicol\source\repos\GICTOFNC\GICTOFNC\bin\Debug\GICTOFNC.exe
+C:\Users\nicol\source\repos\GICTOFNC\GICTOFNC\bin\Debug\GICTOFNC.pdb
+C:\Users\nicol\source\repos\GICTOFNC\GICTOFNC\obj\Debug\GICTOFNC.csprojAssemblyReference.cache
+C:\Users\nicol\source\repos\GICTOFNC\GICTOFNC\obj\Debug\GICTOFNC.Properties.Resources.resources
+C:\Users\nicol\source\repos\GICTOFNC\GICTOFNC\obj\Debug\GICTOFNC.csproj.GenerateResource.cache
+C:\Users\nicol\source\repos\GICTOFNC\GICTOFNC\obj\Debug\GICTOFNC.csproj.CoreCompileInputs.cache
+C:\Users\nicol\source\repos\GICTOFNC\GICTOFNC\obj\Debug\GICTOFNC.exe
+C:\Users\nicol\source\repos\GICTOFNC\GICTOFNC\obj\Debug\GICTOFNC.pdb
+C:\Users\nicol\source\repos\GICTOFNC\GICTOFNC\obj\Debug\GICTOFNC.App.resources

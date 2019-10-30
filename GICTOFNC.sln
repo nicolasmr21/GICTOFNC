@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29215.179
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GICTOFNC", "GICTOFNC\GICTOFNC.csproj", "{39CABD0F-1382-49AF-8FE0-104964026EDE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{39CABD0F-1382-49AF-8FE0-104964026EDE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{39CABD0F-1382-49AF-8FE0-104964026EDE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{39CABD0F-1382-49AF-8FE0-104964026EDE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{39CABD0F-1382-49AF-8FE0-104964026EDE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7D74B1AF-A0C4-4B6A-8428-EA1D1F1B3B0B}
+	EndGlobalSection
+EndGlobal
