@@ -1,4 +1,4 @@
-﻿using Chomskiador;
+﻿using GICTOFNC.Model;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -27,44 +27,9 @@ namespace GICTOFNC
         {
             Console.WriteLine("==Forma Normal de Chomsky==");
 
-            Grammar gr = Utils.LoadFile(txtGrammar.Text);
-
-            Console.WriteLine("\nG:");
-            Console.WriteLine(gr.ToString());
-
-            gr.Start();
-
-            Console.WriteLine("\nSTART G:");
-            Console.WriteLine(gr.ToString());
-
-            gr.Term1();
-
-            Console.WriteLine("\nTERM1 G:");
-            Console.WriteLine(gr.ToString());
-
-            gr.Term2();
-
-            Console.WriteLine("\nTERM2 G:");
-            Console.WriteLine(gr.ToString());
-
-            gr.Bin();
-
-            Console.WriteLine("\nBIN G:");
-            Console.WriteLine(gr.ToString());
-
-            gr.Del();
-
-            Console.WriteLine("\nDEL G:");
-            Console.WriteLine(gr.ToString());
-
-            gr.Unit();
-
-            Console.WriteLine("\nUNIT G:");
-            Console.WriteLine(gr.ToString());
-
-            Console.ReadLine();
-
-            txtGrammar.Text = gr.ToString();
+            Grammar g = new Grammar();
+            g.setAlphabet(txtTerms.Text, textVars.Text);
+            g.setProductions(txtGrammar.Text);
         }
     }
 }

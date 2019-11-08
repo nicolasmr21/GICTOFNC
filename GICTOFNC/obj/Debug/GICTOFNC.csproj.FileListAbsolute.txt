@@ -8,3 +8,13 @@ C:\Users\nicol\source\repos\GICTOFNC\GICTOFNC\obj\Debug\GICTOFNC.csproj.CoreComp
 C:\Users\nicol\source\repos\GICTOFNC\GICTOFNC\obj\Debug\GICTOFNC.exe
 C:\Users\nicol\source\repos\GICTOFNC\GICTOFNC\obj\Debug\GICTOFNC.pdb
 C:\Users\nicol\source\repos\GICTOFNC\GICTOFNC\obj\Debug\GICTOFNC.App.resources
+C:\Users\crisf\source\repos\FNC\GICTOFNC\GICTOFNC\obj\Debug\GICTOFNC.csprojAssemblyReference.cache
+C:\Users\crisf\source\repos\FNC\GICTOFNC\GICTOFNC\obj\Debug\GICTOFNC.App.resources
+C:\Users\crisf\source\repos\FNC\GICTOFNC\GICTOFNC\obj\Debug\GICTOFNC.Properties.Resources.resources
+C:\Users\crisf\source\repos\FNC\GICTOFNC\GICTOFNC\obj\Debug\GICTOFNC.csproj.GenerateResource.cache
+C:\Users\crisf\source\repos\FNC\GICTOFNC\GICTOFNC\obj\Debug\GICTOFNC.csproj.CoreCompileInputs.cache
+C:\Users\crisf\source\repos\FNC\GICTOFNC\GICTOFNC\obj\Debug\GICTOFNC.exe
+C:\Users\crisf\source\repos\FNC\GICTOFNC\GICTOFNC\obj\Debug\GICTOFNC.pdb
+C:\Users\crisf\source\repos\FNC\GICTOFNC\GICTOFNC\bin\Debug\GICTOFNC.exe.config
+C:\Users\crisf\source\repos\FNC\GICTOFNC\GICTOFNC\bin\Debug\GICTOFNC.exe
+C:\Users\crisf\source\repos\FNC\GICTOFNC\GICTOFNC\bin\Debug\GICTOFNC.pdb

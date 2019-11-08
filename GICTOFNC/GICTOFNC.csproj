@@ -48,9 +48,6 @@
   <ItemGroup>
     <Compile Include="Model\Grammar.cs" />
     <Compile Include="Model\Production.cs" />
-    <Compile Include="Model\Terminal.cs" />
-    <Compile Include="Model\Utils.cs" />
-    <Compile Include="Model\Variable.cs" />
     <Compile Include="VC\App.cs">
       <SubType>Form</SubType>
     </Compile>

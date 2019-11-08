@@ -63,11 +63,11 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Menlo", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.label1.Location = new System.Drawing.Point(139, 35);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(594, 56);
+            this.label1.Size = new System.Drawing.Size(581, 55);
             this.label1.TabIndex = 0;
             this.label1.Text = "CONVERTIR GIC A FNC";
             // 
@@ -83,7 +83,7 @@
             // btnConvert
             // 
             this.btnConvert.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(47)))), ((int)(((byte)(108)))));
-            this.btnConvert.Font = new System.Drawing.Font("Menlo", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnConvert.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnConvert.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.btnConvert.Location = new System.Drawing.Point(367, 516);
             this.btnConvert.Name = "btnConvert";
@@ -97,23 +97,23 @@
             // 
             this.label2.AutoSize = true;
             this.label2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(245)))), ((int)(((byte)(233)))));
-            this.label2.Font = new System.Drawing.Font("Menlo", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(47)))), ((int)(((byte)(108)))));
             this.label2.Location = new System.Drawing.Point(61, 159);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(753, 34);
+            this.label2.Size = new System.Drawing.Size(586, 33);
             this.label2.TabIndex = 1;
-            this.label2.Text = "Digite su gramatica de la siguiente forma";
+            this.label2.Text = "Digite su gramática de la siguiente forma";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
             this.label3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(245)))), ((int)(((byte)(233)))));
-            this.label3.Font = new System.Drawing.Font("Menlo", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(47)))), ((int)(((byte)(108)))));
             this.label3.Location = new System.Drawing.Point(174, 202);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(332, 24);
+            this.label3.Size = new System.Drawing.Size(265, 25);
             this.label3.TabIndex = 5;
             this.label3.Text = "A->B|C|D (Sin espacios)";
             // 
@@ -130,11 +130,11 @@
             // 
             this.label4.AutoSize = true;
             this.label4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(245)))), ((int)(((byte)(233)))));
-            this.label4.Font = new System.Drawing.Font("Menlo", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(47)))), ((int)(((byte)(108)))));
             this.label4.Location = new System.Drawing.Point(174, 226);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(570, 24);
+            this.label4.Size = new System.Drawing.Size(423, 25);
             this.label4.TabIndex = 7;
             this.label4.Text = "B->aB|X  (A variable inicial y x lambda)";
             // 
@@ -151,11 +151,11 @@
             // 
             this.label5.AutoSize = true;
             this.label5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(245)))), ((int)(((byte)(233)))));
-            this.label5.Font = new System.Drawing.Font("Menlo", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(47)))), ((int)(((byte)(108)))));
             this.label5.Location = new System.Drawing.Point(606, 267);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(183, 13);
+            this.label5.Size = new System.Drawing.Size(133, 13);
             this.label5.TabIndex = 9;
             this.label5.Text = "Alfabeto de terminales";
             // 
@@ -163,11 +163,11 @@
             // 
             this.label6.AutoSize = true;
             this.label6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(245)))), ((int)(((byte)(233)))));
-            this.label6.Font = new System.Drawing.Font("Menlo", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(47)))), ((int)(((byte)(108)))));
             this.label6.Location = new System.Drawing.Point(143, 267);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(175, 13);
+            this.label6.Size = new System.Drawing.Size(127, 13);
             this.label6.TabIndex = 10;
             this.label6.Text = "Alfabeto de variables";
             // 

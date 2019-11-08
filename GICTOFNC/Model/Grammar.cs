@@ -1,254 +1,190 @@
 ﻿using System;
 using System.Text;
 using System.Collections.Generic;
+using System.Linq;
 
-namespace Chomskiador {
+namespace GICTOFNC.Model
+{
 
     public class Grammar {
 
-        public SortedSet<Variable> Variables { get; set; }
+        public List<char> Variables { get; set; }
 
-        public SortedSet<Terminal> Terminals { get; set; }
-        
-        public SortedSet<Production> Productions { get; set; }
+        public List<char> Terminals { get; set; }
+
+        public List<Production> Productions;
 
         public Grammar() {
-            Productions = new SortedSet<Production>();
-            Terminals = new SortedSet<Terminal>();
-            Variables = new SortedSet<Variable>();
+            Productions = new List<Production>();
+            Terminals = new List<char>();
+            Variables = new List<char>();
         }
 
-        public override String ToString() {
-            StringBuilder sb = new StringBuilder();
-            string prod;
-            foreach (Variable v in Variables) {
-                if (IsHead(v.Var)) {
-                    sb.Append("\n");
-                    sb.Append(v.Var);
-                    sb.Append("->");
-                    prod = "";
-                    foreach (Production p in Productions) {
-                        if (v.Var == p.Head) {
-                            prod += (p.Body + "|");
+        public void setAlphabet(string terminals, string variables)
+        {
+            Terminals = terminals.Split(',').Select(x=> char.Parse(x)).ToList();
+            Variables = variables.Split(',').Select(x => char.Parse(x)).ToList();
+            Terminals.Add('x');
+        }
+
+        public void setProductions(string productions)
+        {
+            var t = productions.Split( "\n".ToArray());
+            for (int i = 0; i < t.Length; i ++)
+            {
+                Productions.Add(new Production(t[i][0], t[i].Substring(3)));
+            }
+            nonTerminals();
+            nonReachable();
+            anulables();
+            print();
+        }
+
+        public bool isTerm(char c)
+        {
+            return Terminals.Contains(c);
+        }
+
+        public bool isVar(char c)
+        {
+            return Variables.Contains(c);
+        }
+
+        public void nonTerminals()
+        {
+            List<char> term = new List<char>();
+            foreach(var a in Productions)
+            {
+                if(a.Body.Intersect(Terminals.Select(x=> x.ToString())).Count()!=0)
+                {
+                    term.Add(a.Head);
+                }
+            }
+            List<char> term1 = new List<char>(term);
+            do
+            {
+                term = new List<char>(term1);
+                foreach (var a in Productions)
+                {
+                    if(a.Body.Any(x=> x.All(y=> term1.Union(Terminals).Contains(y)))&&!term1.Contains(a.Head))
+                    {
+                        term1.Add(a.Head);
+                    }
+                }
+            } while (!term.SequenceEqual(term1));
+            List<char> noTerm = Variables.Except(term1).ToList();
+            for (int i = 0; i < Productions.Count; i++)
+            {
+                Production Prod = Productions[i];
+                if (noTerm.Contains(Prod.Head))
+                {
+                    Productions.Remove(Prod);
+                }
+                else
+                {
+                    for (int j = 0; j < Prod.Body.Count; j++)
+                    {
+                        string body = Prod.Body[j];
+                        if (body.Intersect(noTerm).Count() != 0)
+                        {
+                            Prod.Body.Remove(body);
+                            j--;
                         }
                     }
-                    prod = prod.TrimEnd(new char[1] { '|' });
-                    sb.Append(prod); 
                 }
+                
             }
-            return sb.ToString();
+            foreach(var i in noTerm)
+            {
+                Console.WriteLine(i);
+            }
+            
         }
 
-        public void Compile() {
-            foreach (Production p in Productions) {
-                Variables.Add(new Variable(p.Head));
-                foreach (char c in p.Body.ToCharArray()) {
-                    if (Utils.IsTerminal(c)) {
-                        Terminals.Add(new Terminal(c));
-                    } else if (Utils.IsVariable(c)) {
-                        Variables.Add(new Variable(c));
+        public void nonReachable()
+        {
+            List<char> reach = new List<char>();
+            reach.Add(Variables[0]);
+            for (int i = 0; i < reach.Count; i++)
+            {
+                List<string> l = Productions.First(x => x.Head == reach[i]).Body;
+                foreach(var body in l)
+                {
+                    reach.AddRange(body.Where(x => isVar(x)&&!reach.Contains(x)));
+                }
+            }
+            List<char> nonReach = Variables.Except(reach).ToList();
+            for (int i = 0; i < nonReach.Count; i++)
+            {
+                Productions.Remove(Productions.Find(x=> x.Head==nonReach[i]));
+            }
+
+        }
+
+        public void print()
+        {
+            foreach(var p in Productions)
+            {
+                Console.WriteLine(p);
+            }
+        }
+
+        public void anulables()
+        {
+            List<char> anul = new List<char>();
+            foreach (var a in Productions)
+            {
+                if (a.Body.Contains("x"))
+                {
+                    a.Body.Remove("x");
+                    anul.Add(a.Head);
+                }
+            }
+            List<char> anul1 = new List<char>(anul);
+            do
+            {
+                anul = new List<char>(anul1);
+                foreach (var a in Productions)
+                {
+                    if (a.Body.Any(x => x.All(y=> anul1.Contains(y))) && !anul1.Contains(a.Head))
+                    {
+                        anul1.Add(a.Head);
                     }
                 }
+            } while (!anul.SequenceEqual(anul1));
+            if (anul.Contains(Variables.First()))
+            {
+                Productions.First().Body.Add("x");
             }
-        }
-
-        public bool IsHead(char c) {
-            foreach (Production p in Productions) {
-                if (p.Head == c) {
-                    return true;
-                }
-            }
-            return false;
-        }
-
-        public string ConcatTerminals() {
-            StringBuilder sb = new StringBuilder();
-            foreach (Terminal t in Terminals)
-                sb.Append(t.Term + " ");
-            return sb.ToString();
-        }
-
-        public string ConcatVariables() {
-            StringBuilder sb = new StringBuilder();
-            foreach (Variable v in Variables)
-                sb.Append(v.Var + " ");
-            return sb.ToString();
-        }
-
-        public char NextVariable() {
-            return (char)(((int)Variables.Max.Var) + 1);
-        }
-
-        public char NextChar(char c) {
-            return (char)(((int)c) + 1);
-        }
-
-        public void Start() {
-            //Productions.UnionWith(Production.Parse("Z->S"));
-            Compile();
-        }
-
-        public void Term1() {
-            SortedSet<Production> newP = new SortedSet<Production>();
-            char nextVar = NextVariable();
-            foreach (Production p in Productions) {
-                char[] body = p.Body.ToCharArray();
-                if (body.Length > 1) {
-                    foreach (Char c in body) {
-                        if (Utils.IsTerminal(c)) {
-                            bool success = newP.Add(new Production(nextVar, "" + c));
-                            if (success) {
-                                nextVar = NextChar(nextVar);
+            for (int i = 0; i < Productions.Count; i++)
+            {
+                Production prod = Productions[i];
+                for (int j = 0; j < prod.Body.Count; j++)
+                {
+                    string body = prod.Body[j];
+                    for (int k = 0; k < body.Length; k++)
+                    {
+                        char l = body[k];
+                        if(anul.Contains(l))
+                        {
+                            List<char> unique = new List<char>(body.ToList());
+                            unique.RemoveAt(k);
+                            if (unique.Count() != 0)
+                            {
+                                string n = unique.Select(x => x + "").Aggregate((x, y) => x + y);
+                                if (!prod.Body.Contains(n))
+                                {
+                                    prod.Body.Add(n);
+                                }
                             }
                         }
-                    } 
+                    }
                 }
             }
-            Productions.UnionWith(newP);
-            Compile();
+            
+
         }
 
-        public void Term2() {
-            SortedSet<Production> terminable = new SortedSet<Production>();
-            foreach (Production p in Productions) {
-                if (p.Body.Length == 1 && Utils.IsTerminal(p.Body.ToCharArray()[0])) {
-                    terminable.Add(p);
-                }
-            }
-            SortedSet<Production> newP = new SortedSet<Production>();
-            SortedSet<Production> delP = new SortedSet<Production>();
-            do {
-                newP.Clear();
-                delP.Clear();
-                foreach (Production p in Productions) {
-                    foreach (Production t in terminable) {
-                        if (p.Body.Contains(t.Body) && p.Body.Length > 1) {
-                            Production prod = new Production(p.Head, p.Body);
-                            prod.Body = prod.Body.Replace(t.Body, "" + t.Head);
-                            delP.Add(new Production(p.Head, p.Body));
-                            newP.Add(prod);
-                        }
-                    }
-                }
-                foreach (Production p in delP) {
-                    Productions.Remove(p);
-                }
-                Productions.UnionWith(newP); 
-            } while (delP.Count + newP.Count >= 1);
-            Compile();
-        }
-
-        public void Bin() {
-            char nextVar = NextVariable();
-            SortedSet<Production> newP = new SortedSet<Production>();
-            SortedSet<Production> delP = new SortedSet<Production>();
-            do {
-                newP.Clear();
-                delP.Clear();
-                foreach (Production p in Productions) {
-                    if (p.Body.Length >= 3) {
-                        newP.Add(new Production(p.Head, p.Body.Remove(1) + nextVar));
-                        newP.Add(new Production(nextVar, p.Body.Substring(1)));
-                        delP.Add(p);
-                        nextVar = NextChar(nextVar);
-                    }
-                }
-                foreach (Production p in delP) {
-                    Productions.Remove(p);
-                }
-                Productions.UnionWith(newP);
-            } while (delP.Count + newP.Count >= 1);
-            Compile();
-        }
-        
-        public void Del() {
-            SortedSet<Variable> nullableV = new SortedSet<Variable>();
-            SortedSet<Production> nullableP = new SortedSet<Production>();
-            foreach (Production p in Productions){
-                if (Utils.IsNullable(p)) {
-                    nullableV.Add(new Variable(p.Head));
-                    nullableP.Add(p);
-                }
-            }
-            if (nullableV.Count == 0) return;
-            SortedSet<Variable> addN = new SortedSet<Variable>();
-            SortedSet<Production> newP = new SortedSet<Production>();
-            do {
-                addN.Clear();
-                newP.Clear();
-                foreach (Production p in Productions) {
-                    char[] chars = p.Body.ToCharArray();
-                    int counter = 0;
-                    foreach (char c in chars) {
-                        if (nullableV.Contains(new Variable(c))) {
-                            counter++;
-                        }
-                    }
-                    if (counter == chars.Length && !nullableV.Contains(new Variable(p.Head))) {
-                        addN.Add(new Variable(p.Head));
-                        newP.Add(new Production(p.Head, "z"));
-                        nullableP.Add(new Production(p.Head, "z"));
-                        nullableP.Add(p);
-                    }
-                }
-                nullableV.UnionWith(addN);
-                Productions.UnionWith(newP);
-            } while (addN.Count >= 1);
-            newP.Clear();
-            string pro = "";
-            foreach (Production p in Productions) {
-                SortedSet<string> binaries = Utils.Binaries(p.Body.Length);
-                char[] chars = p.Body.ToCharArray();
-                foreach (string s in binaries) {
-                    char[] binC = s.ToCharArray();
-                    for (int c = 0; c < chars.Length; c++) {
-                        if (!nullableV.Contains(new Variable(chars[c])) || (binC[c] == '1')) {
-                            pro += chars[c];
-                        }
-                    }
-                    if (pro != "") {
-                        newP.Add(new Production(p.Head, pro));
-                    }
-                    pro = "";
-                }
-            }
-            Productions.UnionWith(newP);
-            foreach (Production p in nullableP) {
-                if (Utils.IsNullable(p) && !Utils.IsInitial(p)) {
-                    Productions.Remove(p);
-                }
-            }
-            Compile();
-        }
-
-        public void Unit() {
-            SortedSet<Production> unitary = new SortedSet<Production>();
-            SortedSet<Production> newP = new SortedSet<Production>();
-            SortedSet<Production> delP = new SortedSet<Production>();
-            do {
-                unitary.Clear();
-                newP.Clear();
-                delP.Clear();
-                foreach (Production p in Productions) {
-                    if (p.Body.Length == 1 && Utils.IsVariable(p.Body.ToCharArray()[0])) {
-                        unitary.Add(p);
-                    }
-                }
-                foreach (Production p in Productions) {
-                    foreach (Production u in unitary) {
-                        if (u.Body == ("" + p.Head)) {
-                            newP.Add(new Production(u.Head, p.Body));
-                            delP.Add(u);
-                        }
-                    }
-                }
-                foreach (Production p in delP) {
-                    Productions.Remove(p);
-                }
-                Productions.UnionWith(newP);
-            } while (delP.Count + newP.Count >= 1);
-            Compile();
-        }
 
     }
 
