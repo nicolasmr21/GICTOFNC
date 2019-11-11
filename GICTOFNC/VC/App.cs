@@ -30,6 +30,12 @@ namespace GICTOFNC
             Grammar g = new Grammar();
             g.setAlphabet(txtTerms.Text, textVars.Text);
             g.setProductions(txtGrammar.Text);
+            newGrammar.Text = g.ToString();
+        }
+
+        private void txtGrammar_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

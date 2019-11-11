@@ -37,17 +37,33 @@ namespace GICTOFNC.Model
             nonTerminals();
             nonReachable();
             anulables();
+            unit();
+            binaryOrTerm();
             print();
         }
 
-        public bool isTerm(char c)
+        public bool isTerm(string c)
         {
-            return Terminals.Contains(c);
+            if (c.Length != 1)
+            {
+                return false;
+            }
+            else
+            {
+                return Terminals.Contains(char.Parse(c));
+            }
         }
 
-        public bool isVar(char c)
+        public bool isVar(string c)
         {
-            return Variables.Contains(c);
+            if (c.Length != 1)
+            {
+                return false;
+            }
+            else
+            {
+                return Variables.Contains(char.Parse(c));
+            }
         }
 
         public void nonTerminals()
@@ -79,6 +95,7 @@ namespace GICTOFNC.Model
                 if (noTerm.Contains(Prod.Head))
                 {
                     Productions.Remove(Prod);
+                    i--;
                 }
                 else
                 {
@@ -94,11 +111,6 @@ namespace GICTOFNC.Model
                 }
                 
             }
-            foreach(var i in noTerm)
-            {
-                Console.WriteLine(i);
-            }
-            
         }
 
         public void nonReachable()
@@ -110,7 +122,7 @@ namespace GICTOFNC.Model
                 List<string> l = Productions.First(x => x.Head == reach[i]).Body;
                 foreach(var body in l)
                 {
-                    reach.AddRange(body.Where(x => isVar(x)&&!reach.Contains(x)));
+                    reach.AddRange(body.Where(x => isVar(x+"")&&!reach.Contains(x)));
                 }
             }
             List<char> nonReach = Variables.Except(reach).ToList();
@@ -183,6 +195,114 @@ namespace GICTOFNC.Model
             }
             
 
+        }
+
+        public void unit()
+        {
+            List<List<char>> units = new List<List<char>>();
+            for(int i = 0; i < Productions.Count; i++)
+            {
+                var a = Productions[i];
+                units.Add(new List<char>());
+                units[units.Count - 1].Add(a.Head);
+                for (int j = 0; j < a.Body.Count; j++)
+                {
+                    var prod = a.Body[j];
+                    if (isVar(prod))
+                    {
+                        units[units.Count - 1].Add(char.Parse(prod));
+                        a.Body.Remove(prod);
+                    }
+                }
+            }
+            List<List<char>> units1 = new List<List<char>>(units);
+            do
+            {
+                units = new List<List<char>>(units1);
+                for (int i = 0; i < units1.Count; i++)
+                {
+                    List<char> uniti = units1[i];
+                    for (int j = 1; j < uniti.Count; j++)
+                    {
+                        units1.First(x => x.First() == uniti[j]).ForEach(x =>
+                        {
+                            if (!uniti.Contains(x))
+                            {
+                                uniti.Add(x);
+                            }
+                        });
+                    }
+                }
+            } while (!units.SequenceEqual(units1));
+            foreach(var unit in units)
+            {
+               foreach(var c in unit)
+               {
+                    foreach (var prod in Productions.First(x => x.Head == c).Body)
+                    {
+                        if (!Productions.First(x => x.Head == unit.First()).Body.Contains(prod))
+                        {
+                            Productions.First(x => x.Head == unit.First()).Body.Add(prod);
+                        }
+                    }
+               }
+            }
+            
+        }
+
+        public void binaryOrTerm()
+        {
+            Dictionary<char, char> termvars = new Dictionary<char, char>();
+            Dictionary<string, char> binaryvars = new Dictionary<string, char>();
+            foreach(var a in Terminals)
+            {
+                if(a!='x')
+                {
+                    termvars.Add(a, (char)(Variables.Last() + 1));
+                    Variables.Add(termvars[a]);
+                    Productions.Add(new Production(termvars[a], a.ToString()));
+                }
+            }
+            for (int i = 0; i < Productions.Count; i++)
+            {
+                var prod = Productions[i];
+                for (int j = 0; j < prod.Body.Count; j++)
+                {
+                    var body = prod.Body[j];
+                    foreach(var a in Terminals)
+                    {
+                        if (a != 'x')
+                        {
+                            body = body.Replace(a, termvars[a]);
+                        }
+                    }
+                    for (int k = 0; k < body.Length - 1; k++)
+                    {
+                        if (!binaryvars.ContainsKey(body[k].ToString() + body[k + 1].ToString()) && body.Length > 2)
+                        {
+                            binaryvars.Add(body[k].ToString() + body[k + 1].ToString(), (char)(Variables.Last() + 1));
+                            Variables.Add((char)(Variables.Last() + 1));
+                            Productions.Add(new Production(Variables.Last(), body[k].ToString() + body[k + 1].ToString()));
+                        }
+                        if (body.Length > 2)
+                        {
+                            body = body.Replace(body[k].ToString() + body[k + 1].ToString(), binaryvars[body[k].ToString() + body[k + 1].ToString()] + "");
+                            k--;                            
+                        }
+                        prod.Body[j] = body;
+                    }
+                }
+            }
+        }
+
+        public override string ToString()
+        {
+            string ret = "";
+            foreach(var prod in Productions)
+            {
+                ret += prod.ToString() + "\n";
+            }
+            return ret;
         }
 
 

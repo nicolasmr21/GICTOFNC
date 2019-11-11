@@ -40,6 +40,7 @@
             this.txtTerms = new System.Windows.Forms.RichTextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
+            this.newGrammar = new System.Windows.Forms.RichTextBox();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -76,9 +77,11 @@
             this.txtGrammar.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtGrammar.Location = new System.Drawing.Point(209, 337);
             this.txtGrammar.Name = "txtGrammar";
-            this.txtGrammar.Size = new System.Drawing.Size(443, 173);
+            this.txtGrammar.Size = new System.Drawing.Size(230, 173);
             this.txtGrammar.TabIndex = 3;
-            this.txtGrammar.Text = "S->AB|aBC|SBS\nA->Aa|C\nB->bbB|b\nC->cC|x";
+            this.txtGrammar.Text = "L->S\nS->aAa|bBb|D|x\nA->aAB|BAb|Db\nB->aS|Aa|x\nC->aAc|Cb|ba\nD->aaAb|abA|Da\nE->aF|bF" +
+    "|bE|x\nF->bFb|bC|a";
+            this.txtGrammar.TextChanged += new System.EventHandler(this.txtGrammar_TextChanged);
             // 
             // btnConvert
             // 
@@ -124,7 +127,7 @@
             this.textVars.Name = "textVars";
             this.textVars.Size = new System.Drawing.Size(306, 36);
             this.textVars.TabIndex = 6;
-            this.textVars.Text = "S,A,B,C";
+            this.textVars.Text = "L,S,A,B,C,D,E,F";
             // 
             // label4
             // 
@@ -171,12 +174,22 @@
             this.label6.TabIndex = 10;
             this.label6.Text = "Alfabeto de variables";
             // 
+            // newGrammar
+            // 
+            this.newGrammar.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.newGrammar.Location = new System.Drawing.Point(464, 337);
+            this.newGrammar.Name = "newGrammar";
+            this.newGrammar.Size = new System.Drawing.Size(230, 173);
+            this.newGrammar.TabIndex = 11;
+            this.newGrammar.Text = "";
+            // 
             // App
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(245)))), ((int)(((byte)(233)))));
             this.ClientSize = new System.Drawing.Size(884, 561);
+            this.Controls.Add(this.newGrammar);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.txtTerms);
@@ -213,6 +226,7 @@
         private System.Windows.Forms.RichTextBox txtTerms;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.RichTextBox newGrammar;
     }
 }
 
