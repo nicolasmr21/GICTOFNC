@@ -75,6 +75,7 @@
             // txtGrammar
             // 
             this.txtGrammar.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtGrammar.Font = new System.Drawing.Font("Tw Cen MT", 14.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtGrammar.Location = new System.Drawing.Point(209, 337);
             this.txtGrammar.Name = "txtGrammar";
             this.txtGrammar.Size = new System.Drawing.Size(230, 173);
@@ -123,6 +124,7 @@
             // textVars
             // 
             this.textVars.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textVars.Font = new System.Drawing.Font("Tw Cen MT", 14.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textVars.Location = new System.Drawing.Point(85, 283);
             this.textVars.Name = "textVars";
             this.textVars.Size = new System.Drawing.Size(306, 36);
@@ -137,13 +139,15 @@
             this.label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(47)))), ((int)(((byte)(108)))));
             this.label4.Location = new System.Drawing.Point(174, 226);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(423, 25);
+            this.label4.Size = new System.Drawing.Size(219, 25);
             this.label4.TabIndex = 7;
-            this.label4.Text = "B->aB|X  (A variable inicial y x lambda)";
+            this.label4.Text = "B->aB|x  (x lambda)";
+            this.label4.Click += new System.EventHandler(this.Label4_Click);
             // 
             // txtTerms
             // 
             this.txtTerms.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtTerms.Font = new System.Drawing.Font("Tw Cen MT", 14.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtTerms.Location = new System.Drawing.Point(551, 283);
             this.txtTerms.Name = "txtTerms";
             this.txtTerms.Size = new System.Drawing.Size(306, 36);
@@ -177,6 +181,7 @@
             // newGrammar
             // 
             this.newGrammar.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.newGrammar.Font = new System.Drawing.Font("Tw Cen MT", 14.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.newGrammar.Location = new System.Drawing.Point(464, 337);
             this.newGrammar.Name = "newGrammar";
             this.newGrammar.Size = new System.Drawing.Size(230, 173);

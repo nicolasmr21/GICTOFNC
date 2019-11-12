@@ -3,23 +3,58 @@ using System.Text;
 using System.Collections.Generic;
 using System.Linq;
 
+/**
+ * 
+ *  This project was coded by Cristian Molina and Nicolas Martinez
+ * 
+ */
 namespace GICTOFNC.Model
 {
-
+    /**
+     *  This class represent a grammar tha contains a list of variables, terminals and productions
+     *  It mean Something likely to 
+     *  L->S
+     *  S->aAa|bBb|D|x
+     *  A->aAB|BAb|Db
+     *  B->aS|Aa|x
+     *  C->aAc|Cb|ba
+     *  D->aaAb|abA|Da
+     *  E->aF|bF|bE|x
+     *  F->bFb|bC|a 
+     *  Where L is the initial variable of the grammar, x represents lambda term.
+     */
     public class Grammar {
 
+        /**
+        *    List of grammar's variables 
+        */
         public List<char> Variables { get; set; }
 
+        /**
+        *    List of grammar's terminals 
+        */
         public List<char> Terminals { get; set; }
 
+
+        /**
+        *    List of grammar's productions
+        */
         public List<Production> Productions;
 
+
+        /**
+        *    This method provides a constructor to a grammar  
+        */
         public Grammar() {
             Productions = new List<Production>();
             Terminals = new List<char>();
             Variables = new List<char>();
         }
 
+
+        /**
+         *   This method is responsable for setting the grammar's alphabet
+         */
         public void setAlphabet(string terminals, string variables)
         {
             Terminals = terminals.Split(',').Select(x=> char.Parse(x)).ToList();
@@ -27,6 +62,9 @@ namespace GICTOFNC.Model
             Terminals.Add('x');
         }
 
+        /**
+         *  This method is responsable for setting the grammar's productions 
+         */
         public void setProductions(string productions)
         {
             var t = productions.Split( "\n".ToArray());
@@ -41,7 +79,11 @@ namespace GICTOFNC.Model
             binaryOrTerm();
             print();
         }
-
+        
+        /**
+            This method is responsible for validation of a terminal    
+            returns true if a term is a terminal, otherwise return false
+        */
         public bool isTerm(string c)
         {
             if (c.Length != 1)
@@ -54,6 +96,10 @@ namespace GICTOFNC.Model
             }
         }
 
+        /**
+            This method is responsible for validation of a variable 
+            returns true if a term is a variable, otherwise return false
+        */
         public bool isVar(string c)
         {
             if (c.Length != 1)
@@ -66,6 +112,9 @@ namespace GICTOFNC.Model
             }
         }
 
+        /**
+            This method implements an strategy to remove the nonterminals variables of a grammar     
+        */
         public void nonTerminals()
         {
             List<char> term = new List<char>();
@@ -113,6 +162,9 @@ namespace GICTOFNC.Model
             }
         }
 
+        /**
+            This method implements an strategy to remove the unreachable variables of a grammar     
+        */
         public void nonReachable()
         {
             List<char> reach = new List<char>();
@@ -133,6 +185,9 @@ namespace GICTOFNC.Model
 
         }
 
+        /**
+            This method prints the grammar using the console     
+        */
         public void print()
         {
             foreach(var p in Productions)
@@ -141,6 +196,9 @@ namespace GICTOFNC.Model
             }
         }
 
+        /**
+            This method implements an strategy to remove the anulable productions of a grammar     
+        */
         public void anulables()
         {
             List<char> anul = new List<char>();
@@ -197,6 +255,10 @@ namespace GICTOFNC.Model
 
         }
 
+
+        /**
+            This method implements an strategy to remove the unit productions of a grammar     
+        */
         public void unit()
         {
             List<List<char>> units = new List<List<char>>();
@@ -250,6 +312,11 @@ namespace GICTOFNC.Model
             
         }
 
+        /**
+           This method is responsible for validate and edit the production's form
+           So a production may be likely to the following form:
+           [A → a or A → w, where a ∈ Σ, w ∈ V∗ y |w| ≥ 2.]
+        */
         public void binaryOrTerm()
         {
             Dictionary<char, char> termvars = new Dictionary<char, char>();
@@ -295,6 +362,9 @@ namespace GICTOFNC.Model
             }
         }
 
+        /**
+           This method concatenate the productions to obtain the original grammar   
+        */
         public override string ToString()
         {
             string ret = "";

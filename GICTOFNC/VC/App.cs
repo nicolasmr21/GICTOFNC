@@ -37,5 +37,10 @@ namespace GICTOFNC
         {
 
         }
+
+        private void Label4_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
